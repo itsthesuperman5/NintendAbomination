@@ -274,6 +274,8 @@ public class zeldaState extends BasicGameState {
 		float erp = enemyVel * delta;
 		float eip = 0.2f * delta;
 		float fip = 0.3f * delta;
+		if(playerBound.getY() > 550)
+			playerDead = true;
 		if(!linkDead){
 		if(linkHit >= 3)
 			linkDead = true;
@@ -300,7 +302,6 @@ public class zeldaState extends BasicGameState {
 			}
 			if(hitLink)
 			{
-				System.out.println("Bomb hitting");
 				delay -= delta;
 				if(delay <= 0)
 				{
@@ -399,7 +400,6 @@ public class zeldaState extends BasicGameState {
 			playerBound.setY(playerBound.getY()+0.3f*delta);
 		}
 		Input input = gc.getInput();
-		System.out.println(""+input.getMouseX()+"/"+input.getMouseY());
 		
 		if(input.isKeyDown(Input.KEY_DOWN))
 		{
@@ -423,6 +423,7 @@ public class zeldaState extends BasicGameState {
 		}
 		else if(jumping && playerLift < 0)
 		{
+			if((int)(((playerBound.getY()+player.getStandRight().getHeight())-(pip))/32) < 19){
 			if (ground[(int)playerBound.getX()/32][((int)(((playerBound.getY()+player.getStandRight().getHeight())-(pip))/32))] != true)
 			{
 				playerBound.setY(playerBound.getY()-pip);
@@ -430,9 +431,11 @@ public class zeldaState extends BasicGameState {
 			}
 			else
 			{
-				System.out.println("not jumping");
 				jumping = false;		
 			}
+			}
+			else
+				playerDead = true;
 		}
 		if(input.isKeyPressed(Input.KEY_SPACE) && !jumping)
 		{
