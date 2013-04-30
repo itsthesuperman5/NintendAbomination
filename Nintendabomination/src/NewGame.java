@@ -1,0 +1,45 @@
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.GameState;
+import org.newdawn.slick.state.StateBasedGame;
+
+/**
+ * 
+ */
+
+/**
+ * @author stephenwright
+ *
+ */
+public class NewGame extends StateBasedGame {
+
+	public static final int HUBSTATE = 1;
+	public static final int DKSTATE = 2;
+	public static final int ZELDASTATE = 3;
+	
+	public NewGame() {
+		super("NintendAbomination");
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param args
+	 * @throws SlickException 
+	 */
+	public static void main(String[] args) throws SlickException {
+		// TODO Auto-generated method stub
+		AppGameContainer app = new AppGameContainer(new NewGame());
+		app.setDisplayMode(800, 600, false);
+		app.start();
+	}
+
+	@Override
+	public void initStatesList(GameContainer arg0) throws SlickException {
+		// TODO Auto-generated method stub
+		this.addState(new Hub(HUBSTATE));
+		this.addState(new dkState(DKSTATE));
+		this.addState(new zeldaState(ZELDASTATE));
+	}
+
+}

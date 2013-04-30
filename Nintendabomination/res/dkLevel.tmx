@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="19" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="dkLevel" tilewidth="32" tileheight="32">
+  <image source="dkLevel.png" width="1150" height="886"/>
+  <tile id="40">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="ladder" value="true"/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="baddy" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="25" height="19">
+  <data encoding="base64" compression="zlib">
+   eJyl1ElOw0AQheF2m/kGwAI2zLBgw5QLAJm4CfN4B2YOAizIQYAFOQiwAInfMi1KVru7QhafYtlVL1KV2zYxJkUPetGHfgxgEEOwgZrQM9c/gUlMYRozmMUc5rEQqdH0r2MDm6iihjoaaGIrUqPpv8cDHlGxxtz9/p4nuQtc4grXuAncXzR/GTJXXj+hFZixZvYuQ+Y+4wWveEM7MGPN7F2GzH3HBz7xhe/AjDWzdxkyd5j5jWAUYxi3uqyy+y5D5vr2Vym5n+31Nsl3Wtbn65F77GSnmlrfGdT0xd4LuX/fGdT0xd4LuRvfGdb0Fd8LTc8S9ctYwWrhes3me6yihjoahevY86Yt359mN5qaVmB/3X6PXU07sL9uv8euJsvXnuv//keWv50as4Nd7GEfBzjEEY5xglOcpXl9pz0/uYSMsQ==
+  </data>
+ </layer>
+ <layer name="blocked" width="25" height="19">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF5AJNJJpUjG4GLmBKBXcSMmOo25GMRz4Zixg+OVM0OVxxR26c40sLpABqhOdQtwNf3CKrIcYOZLPIjUdS0getw9Z0BNmBKx0Qm/dB5pOTn0nFAPzvFck=
+  </data>
+ </layer>
+</map>

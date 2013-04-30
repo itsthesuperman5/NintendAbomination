@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="19" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="zeldatiles" tilewidth="32" tileheight="32">
+  <image source="zeldatiles.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="dkLevel" tilewidth="32" tileheight="32">
+  <image source="dkLevel.png" width="1150" height="886"/>
+  <tile id="40">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+  <tile id="95">
+   <properties>
+    <property name="baddy" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="19">
+  <data encoding="base64" compression="zlib">
+   eJztlrERwCAMAw3TZP8J03I5Lo3jSEYqvqEAmQfDjIhpqLiIqMiL3l/76O0J7cA+7MM+7MM+esFYn33gc9gHrw9lKnyonGV2H2q9hdWHaq//08epf2l2UHs2FjK5TzsHnbJn7mUXT+wZs31ybOZB11RV71dvyjpWvcbTExuqPtD1v3EDoNrNIA==
+  </data>
+ </layer>
+ <layer name="property" width="100" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKwCAMRFHv01v1/ocouCpSlZrEjPAfZD84UUsBAAAAAMDPnR0A1dUMctCBBnqI1745s1HBn7XG2uXqjpzQl9J+j1jupOJd7onK6LGL1rfxhPN/+/tPeM1Xhl6eCKo9qebaJWsfR/MAu6kWiA==
+  </data>
+ </layer>
+</map>
