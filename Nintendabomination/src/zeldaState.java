@@ -34,7 +34,7 @@ public class zeldaState extends BasicGameState {
 	private TiledMap map;
 	private Rectangle playerBound;
 	private Rectangle[][] rect;
-	private float pX, pY, bx1, bx2, by1, by2, dkX, dkY;
+	private float pX, pY, bx1, bx2, by1, by2, linkX, linkY;
 	private float playerVel, playerLift, climbVel, enemyVel;
 	private grantSide player;
 	private boolean[][] ground;
@@ -42,22 +42,24 @@ public class zeldaState extends BasicGameState {
 	private Shape[] shape;
 	private int shapeCount;
 	private int mapX, mapY;
+	private int linkHit;
 	private SpriteSheet enemySheet;
 	private SpriteSheet linkSheet;
 	private boolean jumping, right, left, crouched, moving;
-	private boolean bgMusic, finMusic, playerDead;
-	private boolean deathPlayed, bombPlaced, bombExplode;
+	private boolean bgMusic, finMusic, playerDead, linkDead, bossFight, hitLink;
+	private boolean victoryPlayed, bombPlaced, bombExplode, linkAttacking;
 	private ArrayList<badGuy> baddies;
 	private ArrayList<Rectangle> baddyBound;
 	private Image baddyImage;
 	private Image baddyImageFlip;
 	private Rectangle linkBound;
-	private Image[] linkImages;
+	private Image[] linkWalkImages;
+	private Image[] linkAttackImages;
 	private Animation linkWalkAnim;
-	private Animation linkHitAnim;
+	private Animation linkAttackAnim;
 	private Music background, finished, intro, death, playing;
-	private Sound jump, breaks;
-	private int bombTimer, attackTimer;
+	private Sound jump, victory;
+	private int bombTimer, attackTimer, delay, newDelay;
 
 	public zeldaState(int stateID)
 	{
@@ -67,17 +69,24 @@ public class zeldaState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
-		deathPlayed = false;
+		victoryPlayed = false;
 		playerDead = false;
 		moving = false;
 		crouched = false;
 		jumping = false;
 		bombPlaced = false;
 		bombExplode = false;
+		linkDead = false;
+		linkAttacking = false;
+		bossFight = false;
+		hitLink = false;
 		mapX = 0;
 		mapY = 0;
+		linkHit = 0;
 		playerBound.setX(pX);
 		playerBound.setY(pY);
+		linkBound.setX(linkX);
+		linkBound.setY(linkY);
 		this.setBaddies();
 	}
 	
@@ -91,19 +100,34 @@ public class zeldaState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		victory = new Sound("res/Zelda Res/zeldaVictory.wav");
+		linkSheet = new SpriteSheet("res/Zelda Res/link.png", 35, 35);
+		linkWalkImages = new Image[4];
+		linkAttackImages = new Image[2];
+		linkWalkImages[0] = linkSheet.getSprite(3, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkWalkImages[1] = linkSheet.getSprite(2, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkWalkImages[2] = linkSheet.getSprite(1, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkWalkImages[3] = linkSheet.getSprite(0, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkAttackImages[0] = linkSheet.getSprite(4, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkAttackImages[1] = linkSheet.getSprite(5, 0).getScaledCopy(4).getFlippedCopy(true, false);
+		linkWalkAnim = new Animation(linkWalkImages, 200);
+		linkAttackAnim = new Animation(linkAttackImages, 400);
 		bombs = new bomb();
 		bombExplode = false;
+		bossFight = false;
+		linkDead = false;
+		linkAttacking = false;
 		bombPlaced = false;
+		hitLink = false;
 		baddies = new ArrayList<badGuy>();
 		baddyBound = new ArrayList<Rectangle>();
 		bgMusic = false;
 		finMusic = false;
 		background = new Music("res/Zelda Res/zelda.wav");
 		jump = new Sound("res/Classic Music/jump.wav");
-		breaks = new Sound("res/Classic Music/barrel.wav");
 		playing = intro;
 		playerDead = false;
-		deathPlayed = false;
+		victoryPlayed = false;
 		enemySheet = new SpriteSheet("res/ArcadeEnemies.png", 25, 25);
 		baddyImage = enemySheet.getSprite(0, 0);
 		baddyImageFlip = baddyImage.getFlippedCopy(true, false);
@@ -116,10 +140,9 @@ public class zeldaState extends BasicGameState {
 		by1 = 60;
 		bx2 = 660;
 		by2 = 60;
-		dkX = 360;
-		dkY = 20;
 		mapX = 0;
 		mapY = 0;
+		linkHit = 0;
 		playerVel = 0.1f;
 		climbVel = 0.1f;
 		enemyVel = 0.05f;
@@ -136,6 +159,7 @@ public class zeldaState extends BasicGameState {
 			{
 				int tileID = map.getTileId(x, y, 1);
 				String value = map.getTileProperty(tileID, "blocked", "false");
+				String value1 = map.getTileProperty(tileID, "link", "false");
 				String value2 = map.getTileProperty(tileID, "baddy", "false");
 				if ("true".equals(value))
 				{
@@ -144,12 +168,18 @@ public class zeldaState extends BasicGameState {
 					shape[shapeCount] = rect[x][y];
 					shapeCount++;
 				}
+				if("true".equals(value1))
+				{
+					linkX = (float)(x*32);
+					linkY = (float)(y*32);
+				}
 				if("true".equals(value2))
 				{
 					baddyGrid[x][y] = true;
 				}
 			}
 		}
+		linkBound = new Rectangle(linkX, linkY, linkWalkImages[0].getWidth(), linkWalkImages[0].getHeight());
 	}
 
 	@Override
@@ -157,6 +187,15 @@ public class zeldaState extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		map.render(mapX, mapY, 0);
+		if(!linkDead && !playerDead)
+		{
+			if(!linkAttacking)
+			{
+				linkWalkAnim.draw(linkBound.getX()+mapX, linkBound.getY()+mapY-10);
+			}
+			else
+				linkAttackAnim.draw(linkBound.getX()+mapX, linkBound.getY()+mapY);
+		}
 		if(!baddies.isEmpty() && !playerDead)
 		{
 			for(int i = 0; i < baddies.size(); i++)
@@ -235,10 +274,43 @@ public class zeldaState extends BasicGameState {
 		float erp = enemyVel * delta;
 		float eip = 0.2f * delta;
 		float fip = 0.3f * delta;
+		if(!linkDead){
+		if(linkHit >= 3)
+			linkDead = true;
+		if(linkBound.getCenterX() - playerBound.getCenterX() < 200 && !bossFight)
+			bossFight = true;
+		if(bossFight)
+		{
+			linkBound.setX(linkBound.getX() - erp);
+			if(linkAttacking)
+			{
+				delay -= delta;
+				if(delay <= 0)
+				{
+					playerBound.setX(playerBound.getX() - .8f * delta);
+					newDelay -= delta;
+					if(newDelay <= 0)
+						playerDead = true;
+				}
+			}
+			if(linkBound.getCenterX() - playerBound.getCenterX() < 50 && !linkAttacking){
+				linkAttacking = true;
+				delay = 450;
+				newDelay = 500;
+			}
+			if(hitLink)
+			{
+				System.out.println("Bomb hitting");
+				delay -= delta;
+				if(delay <= 0)
+				{
+					linkHit++;
+					hitLink = false;
+				}
+			}
+		}
 		if(bombExplode)
 		{
-			System.out.println(""+bombX+"/"+bombY);
-			System.out.println(""+playerBound.getX()+"/"+playerBound.getY());
 			bombTimer -= delta;
 			if(bombTimer <= 0)
 			{
@@ -255,6 +327,11 @@ public class zeldaState extends BasicGameState {
 				bombPlaced = false;
 				bombTimer = 1000;
 			}
+		}
+		if(linkBound.contains(bombX, bombY) && bombExplode && !hitLink)
+		{
+			hitLink = true;
+			delay = 2000;
 		}
 		if(playerBound.getX()+5 >= bombX && playerBound.getX() < bombX + 50 && bombExplode
 						&& playerBound.getY()+25 >= bombY-10 && playerBound.getY() < bombY + 50)
@@ -279,7 +356,6 @@ public class zeldaState extends BasicGameState {
 				if(baddies.get(i).getAlive()){
 					if(baddies.get(i).getAttacking())
 					{
-						System.out.println(baddyBound.get(i).intersects(playerBound));
 						baddies.get(i).setDelay(baddies.get(i).getDelay()-delta);
 						if(baddies.get(i).getDelay() <= 0)
 							baddies.get(i).setAttacking(false);
@@ -382,7 +458,26 @@ public class zeldaState extends BasicGameState {
 		}
 		else
 			moving = false;
-		
+		}
+		else
+		{
+			background.stop();
+			if(!victoryPlayed)
+			{
+				victory.play();
+				victoryPlayed = true;
+			}
+			else
+			{
+				if(!victory.playing())
+				{
+					Hub.zeldaBeaten = true;
+					Hub.worldsBeaten++;
+					sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
+				}
+					
+			}
+		}
 	}
 
 	@Override

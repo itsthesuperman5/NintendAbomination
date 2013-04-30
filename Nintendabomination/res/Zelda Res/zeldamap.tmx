@@ -15,15 +15,20 @@
     <property name="baddy" value="true"/>
    </properties>
   </tile>
+  <tile id="461">
+   <properties>
+    <property name="link" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztlrERwCAMAw3TZP8J03I5Lo3jSEYqvqEAmQfDjIhpqLiIqMiL3l/76O0J7cA+7MM+7MM+esFYn33gc9gHrw9lKnyonGV2H2q9hdWHaq//08epf2l2UHs2FjK5TzsHnbJn7mUXT+wZs31ybOZB11RV71dvyjpWvcbTExuqPtD1v3EDoNrNIA==
+   eJztljEWgCAMQymn8b5e1CM4+R6DOogxqc2QpQOk+VDorbVuSWkREsIvO1/zyM2JzcA8zMM8zMM8ckmxP/Pg+zAPXR6VheBR5Syr88g0W0LAA4pH1Vn/JY+//qXVxcosBs34fnoOVoHslXigGFzxyHJf1T3Ozsk4WYfdE6rft96UsYbe46hvwc/ePO7rKtoBxebOVA==
   </data>
  </layer>
  <layer name="property" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJzt1UEKwCAMRFHv01v1/ocouCpSlZrEjPAfZD84UUsBAAAAAMDPnR0A1dUMctCBBnqI1745s1HBn7XG2uXqjpzQl9J+j1jupOJd7onK6LGL1rfxhPN/+/tPeM1Xhl6eCKo9qebaJWsfR/MAu6kWiA==
+   eJzt1cENgCAMhWGcx62c2JFMPJkqGNuatuH/kl44PWiB1gAAAAAA8LNFB8BpFYUYlXpQIaNWpT5UJd+ct8qCP0vH2kvtjGTr177c1zLN94jlTma8yz1/ZfSYRevbWOH8r77+E171lKGXZyaz7VeKmsdRHXnFF1k=
   </data>
  </layer>
 </map>
