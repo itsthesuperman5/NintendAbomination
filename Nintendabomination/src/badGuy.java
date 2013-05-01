@@ -87,6 +87,71 @@ public class badGuy
 			attackRight = new Animation(attackRightSteps, 500);
 			attackLeft = new Animation(attackLeftSteps, 500);
 		}
+		
+		if(name.equalsIgnoreCase("beaver"))
+		{
+			type = 4;
+			sheet = new SpriteSheet("res/DK Res/dkfrog.png", 40, 35);
+			right = sheet.getSprite(0, 0);
+			left = right.getFlippedCopy(true, false);
+			jump = null;
+			rightSteps = new Image[6];
+			rightSteps[0] = right.getScaledCopy(2);
+			rightSteps[1] = sheet.getSprite(1, 0).getScaledCopy(2);
+			rightSteps[2] = sheet.getSprite(2, 0).getScaledCopy(2);
+			rightSteps[3] = sheet.getSprite(3, 0).getScaledCopy(2);
+			rightSteps[4] = sheet.getSprite(4, 0).getScaledCopy(2);
+			rightSteps[5] = sheet.getSprite(5, 0).getScaledCopy(2);
+			leftSteps = new Image[6];
+			leftSteps[0] = rightSteps[0].getFlippedCopy(true, false);
+			leftSteps[1] = rightSteps[1].getFlippedCopy(true, false);
+			leftSteps[2] = rightSteps[2].getFlippedCopy(true, false);
+			leftSteps[3] = rightSteps[3].getFlippedCopy(true, false);
+			leftSteps[4] = rightSteps[4].getFlippedCopy(true, false);
+			leftSteps[5] = rightSteps[5].getFlippedCopy(true, false);
+			attackRightSteps = null;
+			attackLeftSteps = null;
+			moveLeft = new Animation(leftSteps, 200);
+			moveRight = new Animation(rightSteps, 200);
+			attackRight = null;
+			attackLeft = null;
+		}
+		if(name.equalsIgnoreCase("vulture"))
+		{
+			type = 4;
+			sheet = new SpriteSheet("res/DK Res/dkvulture.png", 65, 65);
+			right = sheet.getSprite(0, 0);
+			left = right.getFlippedCopy(true, false);
+			jump = null;
+			rightSteps = new Image[10];
+			rightSteps[0] = right;
+			rightSteps[1] = sheet.getSprite(1, 0);
+			rightSteps[2] = sheet.getSprite(2, 0);
+			rightSteps[3] = sheet.getSprite(3, 0);
+			rightSteps[4] = sheet.getSprite(4, 0);
+			rightSteps[5] = sheet.getSprite(5, 0);
+			rightSteps[6] = sheet.getSprite(6, 0);
+			rightSteps[7] = sheet.getSprite(7, 0);
+			rightSteps[8] = sheet.getSprite(8, 0);
+			rightSteps[9] = sheet.getSprite(9, 0);
+			leftSteps = new Image[10];
+			leftSteps[0] = rightSteps[0].getFlippedCopy(true, false);
+			leftSteps[1] = rightSteps[1].getFlippedCopy(true, false);
+			leftSteps[2] = rightSteps[2].getFlippedCopy(true, false);
+			leftSteps[3] = rightSteps[3].getFlippedCopy(true, false);
+			leftSteps[4] = rightSteps[4].getFlippedCopy(true, false);
+			leftSteps[5] = rightSteps[5].getFlippedCopy(true, false);
+			leftSteps[6] = rightSteps[6].getFlippedCopy(true, false);
+			leftSteps[7] = rightSteps[7].getFlippedCopy(true, false);
+			leftSteps[8] = rightSteps[8].getFlippedCopy(true, false);
+			leftSteps[9] = rightSteps[9].getFlippedCopy(true, false);
+			attackRightSteps = null;
+			attackLeftSteps = null;
+			moveLeft = new Animation(leftSteps, 100);
+			moveRight = new Animation(rightSteps, 100);
+			attackRight = null;
+			attackLeft = null;
+		}
 	}
 	
 	public Image getLeft()

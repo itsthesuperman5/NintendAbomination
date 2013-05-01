@@ -22,6 +22,7 @@ public class Hub extends BasicGameState{
 	public static int worldsBeaten = 0;
 	public static boolean classicBeaten = false;
 	public static boolean zeldaBeaten = false;
+	public static boolean countryBeaten = false;
 	private Image background;  //the hub's background image
 	private int stateID;  //the current stateID
 	private grant grant;  //the player's character
@@ -65,10 +66,10 @@ public class Hub extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		// TODO Auto-generated method stub
-		System.out.println(""+playerX+"/"+playerY);
 		background.draw(); //draws the hub background
 		swirls[0].draw(165, 270);
-		swirls[1].draw(215, 380);
+		if(!countryBeaten)
+			swirls[1].draw(215, 380);
 		swirls[2].draw(370, 460);
 		if(!zeldaBeaten)
 			swirls[3].draw(540, 380);
@@ -162,9 +163,13 @@ public class Hub extends BasicGameState{
 		{
 			sbg.enterState(2, new EmptyTransition(), new RotateTransition());
 		}
-		if((playerX > 550 && playerX < 580) && (playerY > 350 && playerY < 400) && !classicBeaten)
+		if((playerX > 540 && playerX < 580) && (playerY > 380 && playerY < 420) && !zeldaBeaten)
 		{
 			sbg.enterState(3, new EmptyTransition(), new RotateTransition());
+		}
+		if((playerX > 215 && playerX < 265) && (playerY > 380 && playerY < 430) && !countryBeaten)
+		{
+			sbg.enterState(4, new EmptyTransition(), new RotateTransition());
 		}
 	}
 }

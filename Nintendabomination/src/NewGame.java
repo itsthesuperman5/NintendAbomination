@@ -17,6 +17,7 @@ public class NewGame extends StateBasedGame {
 	public static final int HUBSTATE = 1;
 	public static final int DKSTATE = 2;
 	public static final int ZELDASTATE = 3;
+	public static final int COUNTRYSTATE = 4;
 	
 	public NewGame() {
 		super("NintendAbomination");
@@ -40,6 +41,7 @@ public class NewGame extends StateBasedGame {
 		this.addState(new Hub(HUBSTATE));
 		this.addState(new dkState(DKSTATE));
 		this.addState(new zeldaState(ZELDASTATE));
+		this.addState(new countryState(COUNTRYSTATE));
 	}
 
 }

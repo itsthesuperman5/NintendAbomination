@@ -12,10 +12,18 @@
     <property name="baddy" value="true"/>
    </properties>
   </tile>
+  <tile id="2353">
+   <properties>
+    <property name="end" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3529" name="forestBG" tilewidth="32" tileheight="32">
+  <image source="forestBG.png" width="800" height="600"/>
  </tileset>
  <layer name="background" width="197" height="19">
   <data encoding="base64" compression="zlib">
-   eJztzjkRwEAQwLADEFKXjz+kLAzPRIUbVd7HWud0Tff0TO+0Of+pl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCl144L3jphfOCfwqPim4=
+   eJzt1UObXlkAhdEvVqUqtm3btm3btp20bdu23bFt23avv3GfPoM12ZN3uFemjcVWsZo1rGUd69nARjaxmS1sZRvb2cFOdrGbPexlH/s5wEFWhkZoRKhxiMMc4SjHOM4JTnKK05zhLOc4zwUuconLXOEq17jODW5yKzRCI2KN29zhLve4Tyw+FktEYpKQlGQkJwUpSUVq0hBHWuJJIB3pyUDG+NAIjWg1MpGZLGQlG9nJQU5ykZs85CUf+SlAQQpRmCIUpRjFKUFJSoVGaESsUZoylKUc5alARSpRmSpUpRrVqUFNalGbOtSlHvVpQEMa0Tg0QiNijSY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rRmz6hERoRa/SlH/0ZwEAGMZghDGUYwxnBSEYxmjGMZRzjmcBEJjGZKUwNjdCIWGMa05nBTGYxmznMZR7zWcBCFrGYJSxlGctZwQM8yEM8zCM8GhqhEbHGYzzOEzzJUzzNMzzLczzPC7zIS7zMK7zKa7zOG7zJW7zNO7zLe6ERGhFrvM8HfMhHfMwnfMpnfM4XfMlXfM03fMt3fM8P/MhP/Mwv/Mpv/B4aoRGxxh/8yV/8zT/8y0pWsZo1rGUd69nARjaxmS1sZRvb2cFOdrE7NEIjYo097GUf+znAQQ5xmCMc5RjHOcFJTnGaM5zlHOe5wEUucZkroREaEWtc5RrXucFNbnGbO9zlHveJJcRiiUhMEpKSjOSkICWpSE0a4kibEBqhEa1GPAmkIz0ZyEgmMpOFrGQjOznISS5yk4e85CM/BShIIQpTJDRCI2KNohSjOCUoSSlKU4aylKM8FahIJSpThapUozo1qEktalOHuqERGhFr1KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudAuN0IhYozs96EkvetOHvvSjPwMYyCAGM4ShDGM4IxjJKEYzhrGMY3xohEbEGhOYyCQmM4WpTGM6M5jJLGYzh7nMYz4LWMgiFrOEpSxjOStCIzQi1qgf53toSCMa0yQu7GH//+7/AXhXl5o=
   </data>
  </layer>
  <layer name="Tile Layer 1" width="197" height="19">
@@ -25,7 +33,7 @@
  </layer>
  <layer name="properties" width="197" height="19">
   <data encoding="base64" compression="zlib">
-   eJztmFESwyAIROP9z9V7dfpZY3AFgqj7ZvLR1BHEXXRyXYQQQgghBKXMToCQZNAThPwT6YlSPb3/kdxGxxPS41QdfcBxJ3nupLVKoD27ftebr3TeWbDMpVmTRxzrOAnU3wRnhZ5weu9qoe1RP7x9lN2Xo/lRb35kr2XEuaiZX+NvJJ41p2xk7z0Wnta20n1e8sEK+feI3odWPUd7jbQfntry9OZKmm+B1nbV9ZE7Vp/uhnb9Uo+aXcMseXhj7d1avVvrOPM+GPn9eQe9oXeZ3R5NnVpIept99iCxvPPZsQ+TNjO0HeH9N3JH5kTPrp2/t+zOqCbrvY7yWmQMTWzE3xH3AvIep+7Zk97r31EebcEziESSyftoX/oCkKQNrw==
+   eJztmMESwyAIRJNjf6f/f+1/dXKsNbgCQdR9Mzk0dRSQXZ0cByGEEEIIQTlHB0BIMqgJQn6J1MRZPK3/kdh6xxPSYtc++oDjdtLcTrlKoJ5dvmvNdzbeWbDMpcnJYx3rOAlU3wRnBk/Y3btqaD3qwltH2XXZGx/7zY/stYw4FzXza/SNrGeNKRvZvcfCXW4z3eclHcwQf4vofajVs9drpP3w7C1Pbc7U8zXQ2s6aH/nHqtPV0OYvedToGmaJwxurd2v73VrHkffByO/PK/QbepdZ7dHUqYbUb6PPHmQt73hW9GFSZ0RvR2j/idiROdGza+XvLavT25PlXkdpLXINzdqIvj294f0CkyJuPHWXy85dv5e/ozRa4/IlaoJEkUn7qC99AbcMDiU=
   </data>
  </layer>
  <layer name="surface" width="197" height="19">

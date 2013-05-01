@@ -30,12 +30,11 @@ public class zeldaState extends BasicGameState {
 	private bomb bombs;
 	private float bombX, bombY;
 	private int stateID;
-	private int hitCounter;
 	private TiledMap map;
 	private Rectangle playerBound;
 	private Rectangle[][] rect;
-	private float pX, pY, bx1, bx2, by1, by2, linkX, linkY;
-	private float playerVel, playerLift, climbVel, enemyVel;
+	private float pX, pY, linkX, linkY;
+	private float playerVel, playerLift, enemyVel;
 	private grantSide player;
 	private boolean[][] ground;
 	private boolean[][] baddyGrid;
@@ -43,23 +42,20 @@ public class zeldaState extends BasicGameState {
 	private int shapeCount;
 	private int mapX, mapY;
 	private int linkHit;
-	private SpriteSheet enemySheet;
 	private SpriteSheet linkSheet;
 	private boolean jumping, right, left, crouched, moving;
-	private boolean bgMusic, finMusic, playerDead, linkDead, bossFight, hitLink;
+	private boolean bgMusic, playerDead, linkDead, bossFight, hitLink;
 	private boolean victoryPlayed, bombPlaced, bombExplode, linkAttacking;
 	private ArrayList<badGuy> baddies;
 	private ArrayList<Rectangle> baddyBound;
-	private Image baddyImage;
-	private Image baddyImageFlip;
 	private Rectangle linkBound;
 	private Image[] linkWalkImages;
 	private Image[] linkAttackImages;
 	private Animation linkWalkAnim;
 	private Animation linkAttackAnim;
-	private Music background, finished, intro, death, playing;
+	private Music background;
 	private Sound jump, victory;
-	private int bombTimer, attackTimer, delay, newDelay;
+	private int bombTimer, delay, newDelay;
 
 	public zeldaState(int stateID)
 	{
@@ -122,29 +118,19 @@ public class zeldaState extends BasicGameState {
 		baddies = new ArrayList<badGuy>();
 		baddyBound = new ArrayList<Rectangle>();
 		bgMusic = false;
-		finMusic = false;
 		background = new Music("res/Zelda Res/zelda.wav");
 		jump = new Sound("res/Classic Music/jump.wav");
-		playing = intro;
 		playerDead = false;
 		victoryPlayed = false;
-		enemySheet = new SpriteSheet("res/ArcadeEnemies.png", 25, 25);
-		baddyImage = enemySheet.getSprite(0, 0);
-		baddyImageFlip = baddyImage.getFlippedCopy(true, false);
 		map = new TiledMap("res/Zelda Res/zeldamap.tmx");
 		player = new grantSide();
 		jumping = false; right = true; left = false; crouched = false; moving = false;
 		pX = 100;
 		pY = 500;
-		bx1 = 115;
-		by1 = 60;
-		bx2 = 660;
-		by2 = 60;
 		mapX = 0;
 		mapY = 0;
 		linkHit = 0;
 		playerVel = 0.1f;
-		climbVel = 0.1f;
 		enemyVel = 0.05f;
 		shapeCount = 0;
 		gc.setMinimumLogicUpdateInterval(20);
@@ -270,10 +256,7 @@ public class zeldaState extends BasicGameState {
 		}
 		float hip = playerVel * delta;
 		float pip = playerLift * delta;
-		float cip = climbVel * delta;
 		float erp = enemyVel * delta;
-		float eip = 0.2f * delta;
-		float fip = 0.3f * delta;
 		if(playerBound.getY() > 550)
 			playerDead = true;
 		if(!linkDead){
