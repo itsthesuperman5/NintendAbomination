@@ -23,6 +23,8 @@ public class Hub extends BasicGameState{
 	public static boolean classicBeaten = false;
 	public static boolean zeldaBeaten = false;
 	public static boolean countryBeaten = false;
+	public static boolean kirbyBeaten = false;
+	public static boolean metroidBeaten = false;
 	private Image background;  //the hub's background image
 	private int stateID;  //the current stateID
 	private grant grant;  //the player's character
@@ -67,15 +69,18 @@ public class Hub extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background.draw(); //draws the hub background
-		swirls[0].draw(165, 270);
+		if(!kirbyBeaten)
+			swirls[0].draw(165, 270);
 		if(!countryBeaten)
 			swirls[1].draw(215, 380);
-		swirls[2].draw(370, 460);
+		if(!metroidBeaten)
+			swirls[2].draw(370, 460);
 		if(!zeldaBeaten)
 			swirls[3].draw(540, 380);
 		if(!classicBeaten)
 			swirls[4].draw(610, 270);
-		swirls[5].draw(380, 75);
+		if(worldsBeaten == 5)
+			swirls[5].draw(380, 75);
 		//the next 4 conditionals draw player's standing image
 		if(orientation.equalsIgnoreCase("Down") && !moving)
 		{
@@ -170,6 +175,14 @@ public class Hub extends BasicGameState{
 		if((playerX > 215 && playerX < 265) && (playerY > 380 && playerY < 430) && !countryBeaten)
 		{
 			sbg.enterState(4, new EmptyTransition(), new RotateTransition());
+		}
+		if((playerX > 165 && playerX < 205) && (playerY > 270 && playerY < 310) && !kirbyBeaten)
+		{
+			sbg.enterState(5, new EmptyTransition(), new RotateTransition());
+		}
+		if((playerX > 370 && playerX < 420) && (playerY > 460 && playerY < 500) && !metroidBeaten)
+		{
+			sbg.enterState(6, new EmptyTransition(), new RotateTransition());
 		}
 	}
 }

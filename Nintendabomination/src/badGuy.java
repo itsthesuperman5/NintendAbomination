@@ -23,12 +23,14 @@ public class badGuy
 	private float delay;
 	private Random rand = new Random();
 	private String direction;
-	private boolean alive, attacking;
+	private boolean alive, attacking, attackingLeft, attackingRight;
 	
 	public badGuy(String name) throws SlickException
 	{
 		alive = true;
 		attacking = false;
+		attackingLeft = false;
+		attackingRight = false;
 		delay = rand.nextInt(5000)+1;
 		int x = rand.nextInt(2)+1;
 		if(x == 1)
@@ -152,6 +154,50 @@ public class badGuy
 			attackRight = null;
 			attackLeft = null;
 		}
+		if(name.equalsIgnoreCase("ball"))
+		{
+			type = 5;
+			sheet = new SpriteSheet("res/Kirby Res/enemy2.png", 32, 64);
+			right = sheet.getSprite(0, 0);
+			left = right.getFlippedCopy(true, false);
+			jump = null;
+			rightSteps = new Image[4];
+			rightSteps[0] = right;
+			rightSteps[1] = sheet.getSprite(1, 0);
+			rightSteps[2] = sheet.getSprite(2, 0);
+			rightSteps[3] = sheet.getSprite(3, 0);
+			leftSteps = new Image[4];
+			leftSteps[0] = rightSteps[0].getFlippedCopy(true, false);
+			leftSteps[1] = rightSteps[1].getFlippedCopy(true, false);
+			leftSteps[2] = rightSteps[2].getFlippedCopy(true, false);
+			leftSteps[3] = rightSteps[3].getFlippedCopy(true, false);
+			attackRightSteps = null;
+			attackLeftSteps = null;
+			moveLeft = new Animation(leftSteps, 200);
+			moveRight = new Animation(rightSteps, 200);
+			attackRight = null;
+			attackLeft = null;
+		}
+		if(name.equalsIgnoreCase("flutter"))
+		{
+			type = 6;
+			sheet = new SpriteSheet("res/Kirby Res/enemy3.png", 32, 32);
+			right = sheet.getSprite(0, 0);
+			left = right.getFlippedCopy(true, false);
+			jump = null;
+			rightSteps = new Image[2];
+			rightSteps[0] = right;
+			rightSteps[1] = sheet.getSprite(1, 0);
+			leftSteps = new Image[2];
+			leftSteps[0] = rightSteps[0].getFlippedCopy(true, false);
+			leftSteps[1] = rightSteps[1].getFlippedCopy(true, false);
+			attackRightSteps = null;
+			attackLeftSteps = null;
+			moveLeft = new Animation(leftSteps, 200);
+			moveRight = new Animation(rightSteps, 200);
+			attackRight = null;
+			attackLeft = null;
+		}
 	}
 	
 	public Image getLeft()
@@ -230,6 +276,26 @@ public class badGuy
 			direction = "left";
 		else if(direction.equalsIgnoreCase("left"))
 			direction = "right";
+	}
+	
+	public void setAttackingRight(boolean t)
+	{
+		attackingRight = t;
+	}
+	
+	public void setAttackingLeft(boolean t)
+	{
+		attackingLeft = t;
+	}
+	
+	public boolean getAttackingRight()
+	{
+		return attackingRight;
+	}
+	
+	public boolean getAttackingLeft()
+	{
+		return attackingLeft;
 	}
 	
 	public String getDirection()
