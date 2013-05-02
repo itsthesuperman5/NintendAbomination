@@ -3,6 +3,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -34,6 +35,7 @@ public class Hub extends BasicGameState{
 	private boolean moving;  //whether the player is moving or not
 	private Animation[] swirls;
 	private vortex vortex;
+	private Music bg;
 	
 	public Hub(int stateID)
 	{
@@ -42,8 +44,14 @@ public class Hub extends BasicGameState{
 	
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
+		bg.play();
 		playerX = 390;
 		playerY = 260;
+	}
+	
+	public void leave(GameContainer gc, StateBasedGame sbg) throws SlickException
+	{
+		bg.stop();
 	}
 
 	@Override
@@ -51,6 +59,7 @@ public class Hub extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background = new Image("res/nexus.png");
+		bg = new Music("res/hub.wav");
 		numLives = 9;
 		grant = new grant();
 		vortex = new vortex();
