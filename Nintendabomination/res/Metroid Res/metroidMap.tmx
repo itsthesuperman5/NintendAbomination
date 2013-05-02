@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="19" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="MetroidTiles" tilewidth="32" tileheight="32">
+  <image source="MetroidTiles.png" width="512" height="480"/>
+  <tile id="34">
+   <properties>
+    <property name="blocked" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="25" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzt0rcNAmEQhNEL8RDioZArgRIogYyUEiiBejAHCd6D8B5a4FuJAu6kf4kueNFqZ5IJWJYVRAhhRBBFDHEkDNyTSCGNDLLIIY8CigbuNqqK7D91lJQ7JL+s3CH5FeUOya8pd0h+XblD8hvKHZLvb9cdf7vumdpuEy200YGDLnq//D4GGGKEMSaYYoY5FlhihTU22Hr43WGPA4444YwLrrjhjgeeeOGNj4ffLxTf2SQ=
+  </data>
+ </layer>
+ <layer name="properties" width="25" height="19">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALKgTIdzB+1Y/jZoTwIMD0AABlyBgU=
+  </data>
+ </layer>
+</map>

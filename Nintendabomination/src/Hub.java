@@ -25,6 +25,7 @@ public class Hub extends BasicGameState{
 	public static boolean countryBeaten = false;
 	public static boolean kirbyBeaten = false;
 	public static boolean metroidBeaten = false;
+	public static int numLives;
 	private Image background;  //the hub's background image
 	private int stateID;  //the current stateID
 	private grant grant;  //the player's character
@@ -50,6 +51,7 @@ public class Hub extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background = new Image("res/nexus.png");
+		numLives = 9;
 		grant = new grant();
 		vortex = new vortex();
 		orientation = "Down";
@@ -122,6 +124,8 @@ public class Hub extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		if(numLives == 0)
+			sbg.enterState(7);
 		this.checkWorlds(sbg);
 		Input input = gc.getInput();
 		float dip = .1f*delta;
@@ -183,6 +187,10 @@ public class Hub extends BasicGameState{
 		if((playerX > 370 && playerX < 420) && (playerY > 460 && playerY < 500) && !metroidBeaten)
 		{
 			sbg.enterState(6, new EmptyTransition(), new RotateTransition());
+		}
+		if((playerX > 380 && playerX < 420) && (playerY > 75 && playerY < 115) && worldsBeaten == 5)
+		{
+			sbg.enterState(7, new EmptyTransition(), new RotateTransition());
 		}
 	}
 }
