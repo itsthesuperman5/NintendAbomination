@@ -56,6 +56,7 @@ public class zeldaState extends BasicGameState {
 	private Music background;
 	private Sound jump, victory;
 	private int bombTimer, delay, newDelay;
+	private boolean livesDecreased;
 
 	public zeldaState(int stateID)
 	{
@@ -66,6 +67,7 @@ public class zeldaState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
 		victoryPlayed = false;
+		livesDecreased = false;
 		playerDead = false;
 		moving = false;
 		crouched = false;
@@ -96,6 +98,7 @@ public class zeldaState extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		livesDecreased = false;
 		victory = new Sound("res/Zelda Res/zeldaVictory.wav");
 		linkSheet = new SpriteSheet("res/Zelda Res/link.png", 35, 35);
 		linkWalkImages = new Image[4];
@@ -251,7 +254,8 @@ public class zeldaState extends BasicGameState {
 		// TODO Auto-generated method stub]
 		if(!bgMusic)
 		{
-			background.loop();	
+			background.loop();
+			background.setVolume(0.1f);
 			bgMusic = true;
 		}
 		float hip = playerVel * delta;
@@ -266,7 +270,7 @@ public class zeldaState extends BasicGameState {
 			bossFight = true;
 		if(bossFight)
 		{
-			linkBound.setX(linkBound.getX() - erp);
+			linkBound.setX(linkBound.getX() - 0.08f*delta);
 			if(linkAttacking)
 			{
 				delay -= delta;
@@ -330,6 +334,10 @@ public class zeldaState extends BasicGameState {
 				deathPlayed = true;
 			}*/
 			playerBound.setY(playerBound.getY()+0.1f*delta);
+			if(!livesDecreased){
+				Hub.numLives--;
+				livesDecreased = true;
+			}
 			//if(!death.playing())
 				sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
 		}

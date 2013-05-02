@@ -63,6 +63,7 @@ public class dkState extends BasicGameState {
 	private int numBarrels;
 	private Music background, finished, intro, death, playing;
 	private Sound jump, breaks;
+	private boolean livesDecreased, introPlayed;
 
 	public dkState(int stateID)
 	{
@@ -72,9 +73,9 @@ public class dkState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
-		intro.play();
 		deathPlayed = false;
 		playerDead = false;
+		livesDecreased = false;
 		moving = false;
 		crouched = false;
 		jumping = false;
@@ -96,7 +97,9 @@ public class dkState extends BasicGameState {
 		// TODO Auto-generated method stub
 		baddies = new ArrayList<badGuy>();
 		baddyBound = new ArrayList<Rectangle>();
+		livesDecreased = false;
 		bgMusic = false;
+		introPlayed = false;
 		finMusic = false;
 		background = new Music("res/Classic Music/backmusic.wav");
 		finished = new Music("res/Classic Music/finished.wav");
@@ -268,6 +271,11 @@ public class dkState extends BasicGameState {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		System.out.println(intro.playing());
+		if(!introPlayed)
+		{
+			intro.play();
+			introPlayed = true;
+		}
 		if(intro.playing() == false && !death.playing() && !bgMusic)
 		{
 			background.loop();	
@@ -289,6 +297,10 @@ public class dkState extends BasicGameState {
 				deathPlayed = true;
 			}
 			playerBound.setY(playerBound.getY()+0.1f*delta);
+			if(!livesDecreased){
+				Hub.numLives--;
+				livesDecreased = true;
+			}
 			if(!death.playing())
 				sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
 		}

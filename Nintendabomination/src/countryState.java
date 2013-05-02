@@ -52,6 +52,7 @@ public class countryState extends BasicGameState{
 	private int delay, newDelay;
 	private boolean deathPlayed;
 	private Random rand;
+	private boolean livesDecreased;
 	
 	public countryState(int stateID)
 	{
@@ -63,6 +64,7 @@ public class countryState extends BasicGameState{
 	{
 		victoryPlayed = false;
 		playerDead = false;
+		livesDecreased = false;
 		moving = false;
 		crouched = false;
 		jumping = false;
@@ -91,6 +93,7 @@ public class countryState extends BasicGameState{
 		victory = new Sound("res/DK Res/victory.wav");
 		death = new Sound("res/DK Res/death.wav");
 		bounce = new Sound("res/DK Res/bounce.wav");
+		livesDecreased = false;
 		deathPlayed = false;
 		victorious = false;
 		baddies = new ArrayList<badGuy>();
@@ -255,6 +258,10 @@ public class countryState extends BasicGameState{
 				deathPlayed = true;
 			}
 			playerBound.setY(playerBound.getY()+0.1f*delta);
+			if(!livesDecreased){
+				Hub.numLives--;
+				livesDecreased = true;
+			}
 			if(!death.playing())
 				sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
 		}

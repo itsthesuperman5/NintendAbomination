@@ -64,6 +64,7 @@ public class metroidState extends BasicGameState{
 	private Image ridleysAttack;
 	private Random rand;
 	private boolean deathPlayed;
+	private boolean livesDecreased;
 
 	public metroidState(int stateID)
 	{
@@ -75,6 +76,7 @@ public class metroidState extends BasicGameState{
 	{
 		victoryPlayed = false;
 		deathPlayed = false;
+		livesDecreased = false;
 		playerDead = false;
 		moving = false;
 		crouched = false;
@@ -99,6 +101,7 @@ public class metroidState extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		rand = new Random();
+		livesDecreased = false;
 		death = new Sound("res/Metroid Res/metroidDeath.wav");
 		victory = new Sound("res/Metroid Res/metroidVictory.wav");
 		ridleySheet = new SpriteSheet("res/Metroid Res/ripley.png", 80, 130);
@@ -244,7 +247,8 @@ public class metroidState extends BasicGameState{
 		// TODO Auto-generated method stub]
 		if(!bgMusic)
 		{
-			background.loop();	
+			background.loop();
+			background.setVolume(0.1f);
 			bgMusic = true;
 		}
 		float hip = playerVel * delta;
@@ -330,6 +334,10 @@ public class metroidState extends BasicGameState{
 				deathPlayed = true;
 			}
 			playerBound.setY(playerBound.getY()+0.1f*delta);
+			if(!livesDecreased){
+				Hub.numLives--;
+				livesDecreased = true;
+			}
 			if(!death.playing())
 				sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
 		}

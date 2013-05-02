@@ -71,6 +71,7 @@ public class Hub extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		background.draw(); //draws the hub background
+		g.drawString("Lives left: "+numLives, 650, 25);
 		if(!kirbyBeaten)
 			swirls[0].draw(165, 270);
 		if(!countryBeaten)

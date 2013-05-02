@@ -49,6 +49,7 @@ public class kirbyState extends BasicGameState{
 	private int delay;
 	private boolean deathPlayed;
 	private Random rand;
+	private boolean livesDecreased;
 	
 	public kirbyState(int stateID)
 	{
@@ -59,6 +60,7 @@ public class kirbyState extends BasicGameState{
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
 		victoryPlayed = false;
+		livesDecreased = false;
 		playerDead = false;
 		moving = false;
 		crouched = false;
@@ -85,6 +87,7 @@ public class kirbyState extends BasicGameState{
 			throws SlickException {
 		// TODO Auto-generated method stub
 		rand = new Random();
+		livesDecreased = false;
 		victory = new Sound("res/Kirby Res/kirbyVictory.wav");
 		death = new Sound("res/Kirby Res/kirbyGameover.wav");
 		bounce = new Sound("res/Kirby Res/kirbyBounce.wav");
@@ -255,6 +258,10 @@ public class kirbyState extends BasicGameState{
 				deathPlayed = true;
 			}
 			playerBound.setY(playerBound.getY()+0.1f*delta);
+			if(!livesDecreased){
+				Hub.numLives--;
+				livesDecreased = true;
+			}
 			if(!death.playing())
 				sbg.enterState(1, new FadeOutTransition(), new FadeInTransition());
 		}
