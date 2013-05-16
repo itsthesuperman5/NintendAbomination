@@ -40,7 +40,7 @@ public class countryState extends BasicGameState{
 	private boolean[][] endGrid;
 	private Shape[] shape;
 	private int shapeCount;
-	private int mapX, mapY;
+	private float mapX, mapY;
 	private boolean jumping, right, left, crouched, moving;
 	private boolean bgMusic, playerDead;
 	private boolean victoryPlayed, victorious;
@@ -153,8 +153,8 @@ public class countryState extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		// TODO Auto-generated method stub
-		map.render(mapX, mapY, 0);
-		map.render(mapX, mapY, 1);
+		map.render((int)mapX, (int)mapY, 0);
+		map.render((int)mapX, (int)mapY, 1);
 		if(!baddies.isEmpty() && !playerDead)
 		{
 			for(int i = 0; i < baddies.size(); i++)
@@ -207,7 +207,7 @@ public class countryState extends BasicGameState{
 		{
 			player.getRunLeft().draw((playerBound.getX()-32)+mapX, playerBound.getY()-26+mapY);
 		}
-		map.render(mapX, mapY, 3);
+		map.render((int)mapX, (int)mapY, 3);
 	}
 
 	@Override

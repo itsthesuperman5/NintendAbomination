@@ -40,7 +40,7 @@ public class zeldaState extends BasicGameState {
 	private boolean[][] baddyGrid;
 	private Shape[] shape;
 	private int shapeCount;
-	private int mapX, mapY;
+	private float mapX, mapY;
 	private int linkHit;
 	private SpriteSheet linkSheet;
 	private boolean jumping, right, left, crouched, moving;
@@ -175,7 +175,7 @@ public class zeldaState extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
 			throws SlickException {
 		// TODO Auto-generated method stub
-		map.render(mapX, mapY, 0);
+		map.render((int)mapX, (int)mapY, 0);
 		if(!linkDead && !playerDead)
 		{
 			if(!linkAttacking)
@@ -270,7 +270,7 @@ public class zeldaState extends BasicGameState {
 			bossFight = true;
 		if(bossFight)
 		{
-			linkBound.setX(linkBound.getX() - 0.08f*delta);
+			linkBound.setX(linkBound.getX() - 0.06f*delta);
 			if(linkAttacking)
 			{
 				delay -= delta;
